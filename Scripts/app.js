@@ -46,66 +46,31 @@ let app = (function () {
         paragraph.textContent = mySentence;
 
         let myArray = [
-            {name: "Tom", age: 25},
-            {name: "Bob", age: 35},
-            {name: "Mike", age: 45},
-            {name: "Juan", age: 55},
-            {name: "Smyth", age: 65}
+            { name: "Tom", age: 25 },
+            { name: "Bob", age: 35 },
+            { name: "Mike", age: 45 },
+            { name: "Juan", age: 55 },
+            { name: "Smyth", age: 65 }
         ];
 
-        myArray.push( {name: "Carol", age: 15});
-        myArray.unshift( {name: "Peter", age: 25});
-
+        myArray.push({ name: "Carol", age: 15 });
+        myArray.unshift({ name: "Jake", age: 45 });
 
         let content = document.getElementsByClassName("content");
         console.log("myArray length: " + myArray.length);
 
-        /* loop type # 1 - classic for loop
-        for(let index = 0; index < myArray.length; index++) {
-            console.log(myArray[index].name);
-        }
-        */
-
-        /* loop type # 2 - foreach (modern)
-        myArray.forEach(person => {
-            console.log(person.name);
-        });
-        */
-
-        /* loop type # 3 - foreach (classic)
-        myArray.forEach(function(person){
-            console.log(person.name);
-        });
-        */
-
-        /* loop type # 4 - for in (modern)
-        for (const index in myArray) {
-            console.log(myArray[index].name);
-        }
-        */
-
-        /* loop type # 5 - for of (modern)
-        for (const person of myArray) {
-            console.log(person.name);
-        }
-        */
-
-        /* loop type # 6 - while (classic)
-        let index = 0;
-        while (index < myArray.length) {
-            console.log(myArray[index].name);
-            index++;
-        }
-        */
 
         let arrayEmpty;
 
         // ternary operator - alternate toggle conditional statement
-        arrayEmpty = (myArray.length > 0 ) ?  false : true;
+        arrayEmpty = (myArray.length > 0) ? false : true;
+
 
         // === checks both value and type where == only checks value
-        if(myArray[0].age === 25) {
-            
+        if (myArray[0].age === 25) {
+
+
+
             console.log("First Element is Peter");
         }
 
@@ -121,30 +86,33 @@ let app = (function () {
         console.log(myAssociateArray);
         console.log(myAssociateArray["Name"]);
 
-        let myFavouriteThingsList =[
-            " Games",
+        let myFavouriteThingsList = [
+            "Video Games",
             "Movies",
-            "Comic",
-            "research"
+            "Cars",
+            "Space Flight (FTL)"
         ];
 
 
 
         // "hook into" a ul that is empty that has an id of "myFavouriteThings"
-
-        //myloop tried different ways but cant get output
         let myFavouritesList = document.getElementById("myFavouriteThings");
-       let thing =0;
-        while (thing < myFavouriteThingsList.length) 
-        {
+
+        myFavouriteThingsList.forEach(thing => {
             let newItem = document.createElement("li");
             newItem.textContent = thing;
             myFavouritesList.appendChild(newItem);
-        };
+        });
 
 
-        
+
         console.log(myFavouritesList);
+    }
+
+
+
+    function ContactContent() {
+        // does nothing right now
     }
 
     function Start() {
@@ -155,17 +123,54 @@ let app = (function () {
         console.log("----------------------------");
         console.log("Title: " + title);
 
-        switch (title) {
-            case "COMP125 - Home":
-                HomeContent();
-                break;
+        try {
 
-            case "COMP125 - About":
-                AboutContent();
-                break;
 
-            default:
-                break;
+            switch (title) {
+                case "COMP125 - Home":
+                    HomeContent();
+                    break;
+
+                case "COMP125 - About":
+                    AboutContent();
+                    break;
+
+                case "COMP125 - Contact":
+                    ContactContent();
+                    break;
+
+                default:
+                    throw ("Title not Defined");
+                    break;
+            }
+        }
+        catch {
+            console.warn("Something went wrong when switching pages");
+        }
+
+        try {
+
+
+            switch (navbar) {
+                case "Home":
+                    HomeContent();
+                    break;
+
+                case "About":
+                    AboutContent();
+                    break;
+
+                case "Contact":
+                    ContactContent();
+                    break;
+
+                default:
+                    throw ("navbar error");
+                    break;
+            }
+        }
+        catch {
+            console.warn("Something went wrong when navbar sorry");
         }
     }
 
@@ -174,10 +179,10 @@ let app = (function () {
 
     window.addEventListener("load", Start);
 
-    
+
     return {
         title: document.title
 
     };
-    
+
 })();
